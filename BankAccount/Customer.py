@@ -1,16 +1,19 @@
 from Person import Person
 
 
-class Employee(Person):
-    def __init__(self, firstname, lastname, address, salary):
+class Customer(Person):
+    def __init__(self, firstname, lastname, address):
         Person.__init__(self, firstname, lastname, address)
-        self.salary = salary
+        self.netWorth = 1000
+        self.json = {"networth": self.netWorth}
 
-    def giveRaise(self):
+    def run(self):
         try:
-            amount = int(input("How much is the raise?"))
+            nw = int(input("What is your net worth?"))
+            if type(nw) != int:
+                raise ValueError
         except ValueError:
-            print("Unable to process")
+            print("Invalid input")
         else:
-            self.salary = self.salary + amount
-            return self.salary
+            self.json["networtth"] = nw
+            print("Thank you")

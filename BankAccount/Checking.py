@@ -4,14 +4,17 @@ from BankAccount import BankAccount
 class Checking(BankAccount):
     def withdraw(self):
         try:
-            inputString = input("Is this bank in your network? ")
-            if inputString.lower not in ['y', 'yes', 'n', 'no']:
-                raise Exception
-        except Exception:
-            print("answer not recognized")
-            return
+            selection = int(input("1. Bank is in network \n"
+                                  "2. Bank is out of network"))
+            if selection not in [1, 2]:
+                raise ValueError
+        except ValueError:
+            print("Invalid selection")
         else:
-            if inputString.lower in ['n', 'no']:
-                return super(Checking, self).withdraw() + 1
+            if selection == 1:
+                return super(Checking, self).processWithdraw()
             else:
-                return super(Checking, self).withdraw()
+                return super(Checking, self).processWithdraw() + 1 # out of network fee
+
+    def deposit(self):
+        return super(Checking, self).processDeposit()
