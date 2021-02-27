@@ -1,9 +1,9 @@
-from Checking import Checking
-from Savings import Savings
+# from Checking import Checking
+# from Savings import Savings
 import json
 
 
-class BankAccount():
+class BankAccount:
     def __init__(self):
         self.balance = 100
         self.json = {"Balance": self.balance}
@@ -95,3 +95,43 @@ class BankAccount():
             if inputString.lower in ['y', 'yes']:
                 print("Account Balance: ", self.balance)
             print("Thanks!")
+
+
+class Checking(BankAccount):
+    def withdraw(self):
+        try:
+            selection = int(input("1. Bank is in network \n"
+                                  "2. Bank is out of network"))
+            if selection not in [1, 2]:
+                raise ValueError
+        except ValueError:
+            print("Invalid selection")
+        else:
+            if selection == 1:
+                return super(Checking, self).processWithdraw()
+            else:
+                return super(Checking, self).processWithdraw() + 1  # out of network fee
+
+    def deposit(self):
+        return super(Checking, self).processDeposit()
+
+
+class Savings(BankAccount):
+    def __init__(self):
+
+        self.withdrawCap = 3
+        self.withdrawCount = 0
+        super().__init__()
+
+    def withdraw(self):
+        try:
+            if self.withdrawCount > self.withdrawCap:
+                raise ValueError
+        except ValueError:
+            print("Too many withdraws")
+        else:
+            self.withdrawCount += 1
+            return super(Savings, self).processWithdraw()
+
+    def deposit(self):
+        return super(Savings, self).deposit() * 0.15
