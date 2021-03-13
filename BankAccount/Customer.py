@@ -1,19 +1,10 @@
-# from Person import Person
-#
-#
-# class Customer(Person):
-#     def __init__(self, firstname, lastname, address):
-#         Person.__init__(self, firstname, lastname, address)
-#         self.netWorth = 1000
-#         self.json = {"networth": self.netWorth}
-#
-#     def run(self):
-#         try:
-#             nw = int(input("What is your net worth?"))
-#             if type(nw) != int:
-#                 raise ValueError
-#         except ValueError:
-#             print("Invalid input")
-#         else:
-#             self.json["networth"] = nw
-#             print("Thank you")
+class Customer():
+    def __init__(self, first_name, last_name):
+        self.first_name = first_name
+        self.last_name = last_name
+
+    def create_account(self):
+        pass
+
+    def get_customer(self):
+        pass
