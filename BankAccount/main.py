@@ -1,25 +1,34 @@
-from BankAccount import BankAccount
-from Person import Person
-from Service import Service
+
+def initial_screen():
+    print("[1] Open a new account" )
+    print("[2] Access an existing account")
+    print("[3] Exit")
+
+    s = ""
+    while s != "3":
+        print("Please Enter from menu. Use [3] to exit: ", end='')
+        s = input().strip()
+        if s == "1":
+            return new_account_screen
+        elif s == "2":
+            return existing_account_screen
+        elif s == "3":
+            return None
 
 
-def run():
-    try:
-        selection = int(input("1. BankAccount \n"
-                              "2. Person"
-                              "3. Service"))
-        if selection not in [1, 2, 3]:
-            raise ValueError
-    except ValueError:
-        print("Invalid selection")
-    else:
-        if selection == 1:
-            account = BankAccount()
-            account.run()
-        elif selection == 2:
-            person = Person()
-            person.run()
-        elif selection == 3:
-            service = Service()
-            service.run()
+def new_account_screen():
+    print("New Account Screen")
+    return initial_screen
 
+def existing_account_screen():
+    print("Existing Account Screen")
+    return initial_screen
+
+if __name__ == '__main__':
+
+    next = initial_screen
+
+    # process screens until done
+    while next:
+        next = next()
+    print("\nExiting")
